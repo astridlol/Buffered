@@ -1,0 +1,28 @@
+[kits.starter]
+name = "<gray>Knight"
+guiItem = "minecraft:iron_helmet"
+items = [
+    { material = "minecraft:iron_sword", name = "<white>Knight's Blade" },
+    { material = "minecraft:nether_star", name = "<white>Knight's Star", nbt = "knightBlade", lore = ["<white>", "<s>Makes you go fast", "<s>Cooldown: <p>1 minute"] },
+]
+armor = [
+    { material = "minecraft:iron_helmet" },
+    { material = "minecraft:iron_chestplate" },
+    { material = "minecraft:iron_leggings" },
+    { material = "minecraft:iron_boots" },
+]
+
+
+
+[kits.witch]
+name = "<#4fb832>Witch"
+guiItem = 'minecraft:splash_potion'
+items = [
+    { material = "minecraft:iron_sword", name = "<#4fb832>Witch Sword", lore = ["<s>Hit a player to give them a <p>random</p> effect."], nbt = "witchBlade" },
+]
+armor = [
+    { material = "minecraft:golden_helmet" },
+    { material = "minecraft:golden_chestplate" },
+    { material = "minecraft:golden_leggings" },
+    { material = "minecraft:golden_boots" },
+]
