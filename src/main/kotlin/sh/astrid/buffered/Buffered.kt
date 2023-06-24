@@ -7,6 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin
 import sh.astrid.buffered.data.Database
 import sh.astrid.buffered.data.Kits
 import sh.astrid.buffered.data.Messages
+import sh.astrid.buffered.data.Tags
 import sh.astrid.buffered.events.EntityDamageListener
 import sh.astrid.buffered.events.JoinListener
 import sh.astrid.buffered.events.abiliites.KnightAbility
@@ -18,22 +19,29 @@ class Buffered : JavaPlugin() {
         lateinit var instance: Buffered
         lateinit var kitData: Kits
         lateinit var messageData: Messages
+        lateinit var tagData: Tags
         var cooldowns = CooldownManager()
     }
 
     fun reloadKits() {
         val mapper = tomlMapper {}
-
         dataFolder.mkdir()
 
-        val kitConfig = dataFolder.resolve("kits.toml")
-        saveResource("kits.toml", false)
+        val fileConfigs = listOf(
+                "kits.toml" to "kits.toml",
+                "messages.toml" to "messages.toml",
+                "tags.toml" to "tags.toml"
+        )
 
-        val msgConfig = dataFolder.resolve("messages.toml")
-        saveResource("messages.toml", false)
-
-        kitData = mapper.decode(kitConfig.toPath())
-        messageData = mapper.decode(msgConfig.toPath())
+        fileConfigs.forEach { (configFile, resourceName) ->
+            val configPath = dataFolder.resolve(configFile)
+            saveResource(resourceName, false)
+            when (resourceName) {
+                "kits.toml" -> kitData = mapper.decode(configPath.toPath())
+                "messages.toml" -> messageData = mapper.decode(configPath.toPath())
+                "tags.toml" -> tagData = mapper.decode(configPath.toPath())
+            }
+        }
     }
 
     init {
