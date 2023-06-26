@@ -35,7 +35,7 @@ class ChatListener : Listener {
             val heartColor = when (playerRank.lowercase()) {
                 "owner" -> "<l>"
                 "admin" -> "<p>"
-                else -> ""
+                else ->  "<y>"
             }
             heart = "$heartColor❤"
         }
@@ -55,8 +55,6 @@ class ChatListener : Listener {
                 format = "$level $rankMsg $playerName: $chatColor$message"
             }
         }
-
-        Buffered.instance.logger.info("Using format: $format")
 
 //        event.format = format.toLegacy()
         event.isCancelled = true

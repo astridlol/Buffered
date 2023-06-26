@@ -70,6 +70,7 @@ fun getMMResolvers(): Array<TagResolver> {
             TagResolver.resolver("s", Tag.styling(TextColor.color(255, 181, 207))),
             TagResolver.resolver("t", Tag.styling(TextColor.color(235, 155, 183))),
             TagResolver.resolver("g", Tag.styling(TextColor.color(191, 255, 198))),
+            TagResolver.resolver("y", Tag.styling(TextColor.color(240, 245, 171))),
             TagResolver.resolver("l", Tag.styling(TextColor.color(244, 212, 255))),
     ).toTypedArray()
 }
