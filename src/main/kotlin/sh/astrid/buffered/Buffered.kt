@@ -74,6 +74,7 @@ class Buffered : JavaPlugin() {
         JoinListener()
         ChatListener()
         EntityDamageListener()
+        BlockListener()
 
         // Abilities
         KnightAbility()

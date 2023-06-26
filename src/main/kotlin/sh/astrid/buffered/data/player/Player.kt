@@ -91,6 +91,11 @@ class BufferedPlayer(uuid: UUID) {
         col.updateOne(query, addToSet(PlayerEntry::ownedTags, tag))
     }
 
+    // Misc
+    fun setBuildMode(enabled: Boolean) {
+        col.updateOne(query, setValue(PlayerEntry::buildMode, enabled))
+    }
+
     fun getPlayer(): PlayerEntry {
         return player
     }
