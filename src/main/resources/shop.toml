@@ -1,0 +1,4 @@
+[shop.stew]
+name = "<p>Mushroom Stew"
+material = "minecraft:mushroom_stew"
+price = 5

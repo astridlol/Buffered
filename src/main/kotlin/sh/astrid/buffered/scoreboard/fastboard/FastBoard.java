@@ -1,4 +1,4 @@
-package sh.astrid.buffered.scoreboard;
+package sh.astrid.buffered.scoreboard.fastboard;
 
 /*
  * This file is part of FastBoard, licensed under the MIT License.

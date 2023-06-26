@@ -4,15 +4,16 @@ import cc.ekblad.toml.decode
 import cc.ekblad.toml.tomlMapper
 import me.honkling.commando.CommandManager
 import org.bukkit.plugin.java.JavaPlugin
-import sh.astrid.buffered.data.Database
-import sh.astrid.buffered.data.Kits
-import sh.astrid.buffered.data.Messages
-import sh.astrid.buffered.data.Tags
-import sh.astrid.buffered.events.EntityDamageListener
-import sh.astrid.buffered.events.JoinListener
+import sh.astrid.buffered.data.*
+import sh.astrid.buffered.events.*
 import sh.astrid.buffered.events.abiliites.KnightAbility
 import sh.astrid.buffered.events.abiliites.WitchAbility
 import sh.astrid.buffered.lib.CooldownManager
+import sh.astrid.buffered.lib.forever
+import sh.astrid.buffered.scoreboard.fastboard.FastBoard
+import sh.astrid.buffered.scoreboard.updateScoreboard
+import java.util.*
+
 
 class Buffered : JavaPlugin() {
     companion object {
@@ -20,32 +21,36 @@ class Buffered : JavaPlugin() {
         lateinit var kitData: Kits
         lateinit var messageData: Messages
         lateinit var tagData: Tags
+        lateinit var shopData: Shop
+        var boards: MutableMap<UUID, FastBoard> = HashMap()
         var cooldowns = CooldownManager()
     }
 
-    fun reloadKits() {
+    fun reloadConfigs() {
         val mapper = tomlMapper {}
         dataFolder.mkdir()
 
         val fileConfigs = listOf(
-                "kits.toml" to "kits.toml",
-                "messages.toml" to "messages.toml",
-                "tags.toml" to "tags.toml"
+                "kits.toml",
+                "messages.toml",
+                "tags.toml",
+                "shop.toml"
         )
 
-        fileConfigs.forEach { (configFile, resourceName) ->
+        fileConfigs.forEach { configFile ->
             val configPath = dataFolder.resolve(configFile)
-            saveResource(resourceName, false)
-            when (resourceName) {
+            saveResource(configFile, false)
+            when (configFile) {
                 "kits.toml" -> kitData = mapper.decode(configPath.toPath())
                 "messages.toml" -> messageData = mapper.decode(configPath.toPath())
                 "tags.toml" -> tagData = mapper.decode(configPath.toPath())
+                "shop.toml" -> shopData = mapper.decode(configPath.toPath())
             }
         }
     }
 
     init {
-        reloadKits()
+        reloadConfigs()
     }
 
     override fun onEnable() {
@@ -58,9 +63,16 @@ class Buffered : JavaPlugin() {
         val commandManager = CommandManager(instance)
         commandManager.registerCommands("sh.astrid.buffered.commands")
 
+        forever({ _ ->
+            boards.forEach {
+                it.value.updateScoreboard()
+            }
+       }, 20 * 3)
+
 
         // Setup events
         JoinListener()
+        ChatListener()
         EntityDamageListener()
 
         // Abilities

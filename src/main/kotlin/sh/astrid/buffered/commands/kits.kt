@@ -40,7 +40,7 @@ fun kits(executor: Player) {
         return
     }
 
-    var gui = GUI(Buffered.instance, template, "Kit GUI")
+    var gui = GUI(Buffered.instance, template, "Kits")
     gui = gui.put('x', ItemStack(Material.PINK_STAINED_GLASS_PANE).setName("<red>"))
     gui = gui.put('y', createSkull(questionSkull).setName("<i><p>Coming soon..."))
 
@@ -52,7 +52,7 @@ fun kits(executor: Player) {
         var name = it.value.name
 
         if(isCurrent) name = "<p>$name <i>(Current)"
-        item = item.setName(name).setLore(it.value.description)
+        item = item.setName(name).setDescription(it.value.description)
 
         gui = gui.put(index, item) { _ ->
             if(!isCurrent){

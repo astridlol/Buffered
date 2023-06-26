@@ -20,7 +20,7 @@ fun ItemStack.hasNBT(nbt: String): Boolean {
     return NBTEditor.contains(this, nbt, "item")
 }
 
-fun ItemStack.setLore(lore: String): ItemStack {
+fun ItemStack.setDescription(lore: String): ItemStack {
     val meta = this.itemMeta
     lore.let {
         meta.lore(listOf(lore.mm()))

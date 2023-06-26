@@ -15,6 +15,8 @@ import org.bukkit.inventory.ItemStack
 import sh.astrid.buffered.Buffered
 import sh.astrid.buffered.data.player.BufferedPlayer
 import sh.astrid.buffered.lib.extensions.*
+import sh.astrid.buffered.scoreboard.updateScoreboard
+import kotlin.random.Random
 
 fun Player.parseKillMessage(killer: Player): Component {
     val mm = MiniMessage.miniMessage()
@@ -77,6 +79,7 @@ class EntityDamageListener : Listener {
         victim.tpToSpawn()
 
         // If they weren't killed by a player, return
+        // NOTE: This does not account for players who've been killed by a bow. need to add support for this!
         if(killer !is Player) return
 
         val killerData = BufferedPlayer(killer.uniqueId)
@@ -97,5 +100,16 @@ class EntityDamageListener : Listener {
         // Reset the players current kit
         // In the future, check if they have re-kit enabled. The permission node buffered.rekit would be set for the toggle command.
         victimData.setKit(null)
+        victim.inventory.clear()
+
+        // Add EXP to killer
+        killerData.addExp(Random.nextInt(1, 11))
+
+        // Add gold to killer
+        val randomGold = Random.nextInt(1, 6)
+        val scalingFactor = 0.5 // Adjust this factor to control the rate of increase
+        val increasedGold = randomGold * killerData.getPlayer().level * scalingFactor
+
+        killer.sendActionBar("<g>+ $increasedGold".mm())
     }
 }

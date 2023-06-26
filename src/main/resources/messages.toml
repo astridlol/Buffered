@@ -1,3 +1,9 @@
 killMessages = [
     "test"
 ]
+levelUp = [
+    "<player> just leveled up to <level>"
+]
+earnedCoins = [
+    "You have earned <coins> coins."
+]

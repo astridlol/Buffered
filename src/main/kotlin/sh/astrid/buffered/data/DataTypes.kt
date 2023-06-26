@@ -14,5 +14,7 @@ data class PlayerEntry(
         val deaths: Int = 0,
         val kills: Int = 0,
         val killstreak: Int = 0,
-        val currentKit: String? = null
+        val currentKit: String? = null,
+        val ownedTags: List<String> = listOf(""),
+        val currentTag: String? = null,
 )

@@ -13,12 +13,27 @@ armor = [
 ]
 
 
+[kits.archer]
+name = "<aqua>Archer"
+guiItem = 'minecraft:bow'
+items = [
+    { material = "minecraft:bow", name = "<aqua>Archer Bow", enchantments = ["infinity:1", "power:1"] },
+    { material = "minecraft:stick", name = "<aqua>Archer Knocker", enchantments = ["knockback:2"] },
+    { material = "minecraft:arrow" },
+]
+armor = [
+    { material = "minecraft:leather_helmet" },
+    { material = "minecraft:leather_chestplate" },
+    { material = "minecraft:leather_leggings" },
+    { material = "minecraft:leather_boots" },
+]
 
 [kits.witch]
 name = "<#4fb832>Witch"
 guiItem = 'minecraft:splash_potion'
 items = [
-    { material = "minecraft:iron_sword", name = "<#4fb832>Witch Sword", lore = ["<s>Hit a player to give them a <p>random</p> effect."], nbt = "witchBlade" },
+    { material = "minecraft:iron_sword", name = "<#4fb832>Witch Sword", lore = ["<s>Hit a player to give them a <p>random</p> effect."], nbt = "witchSword" },
+    { material = "minecraft:enchanted_golden_apple", name = "<#4fb832>Witch Apple", lore = ["<s>Eat this apple for a <p>random</p> effect :>"], nbt = "witchApple", amount = 2 },
 ]
 armor = [
     { material = "minecraft:golden_helmet" },

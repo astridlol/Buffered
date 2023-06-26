@@ -4,6 +4,6 @@ main: sh.astrid.buffered.Buffered
 api-version: "1.20"
 load: STARTUP
 authors: [Astrid]
-depend: [WorldGuard]
+depend: [WorldGuard, Linky]
 description: KitPvP core for Buffered.
 website: https://astrid.sh/

@@ -1,6 +1,6 @@
 @file:Command(
-    "reloadkits",
-    permission = "buffered.reload.kits"
+    "reloadconfig",
+    permission = "buffered.reload"
 )
 
 package sh.astrid.buffered.commands
@@ -11,8 +11,8 @@ import sh.astrid.buffered.Buffered
 import sh.astrid.buffered.lib.extensions.mm
 
 @Suppress("unused")
-fun reloadkits(executor: Player) {
-    Buffered.instance.reloadKits()
+fun reloadconfig(executor: Player) {
+    Buffered.instance.reloadConfigs()
 
     executor.sendMessage("<green>Reloaded kit data.".mm())
 }
