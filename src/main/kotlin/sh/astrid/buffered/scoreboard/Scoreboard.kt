@@ -11,6 +11,7 @@ import sh.astrid.buffered.data.player.BufferedPlayer
 import sh.astrid.buffered.lib.extensions.getMMResolvers
 import sh.astrid.buffered.lib.extensions.mm
 import sh.astrid.buffered.lib.extensions.parse
+import sh.astrid.buffered.lib.extensions.proper
 import sh.astrid.buffered.scoreboard.fastboard.FastBoard
 
 fun String.parseMM(player: Player): Component {
@@ -39,6 +40,7 @@ private fun FastBoard.setLines() {
 
     val ping = "%player_ping%".parse(this.player)
     val tps = "%server_tps_1%".parse(this.player)
+    val playerRank = "%vault_rank%".parse(this.player).proper()
 
     this.updateTitle("<p><b><u>Buffered</u></b> <dark_gray>(<p>$online/$total</p>)".mm());
     // Change the lines
@@ -46,7 +48,7 @@ private fun FastBoard.setLines() {
             listOf(
                     "",
                     "<s>Player",
-                    "$bullet Rank: <t>%vault_rank%".parse(this.player),
+                    "$bullet Rank: <t>$playerRank",
                     "$bullet Coins: <t><coins>",
                     "",
                     "<s>Stats",

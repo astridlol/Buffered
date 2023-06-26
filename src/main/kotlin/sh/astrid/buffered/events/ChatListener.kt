@@ -48,11 +48,11 @@ class ChatListener : Listener {
             format = "$level $tag $playerName: $chatColor$message"
 
             if (heart !== null) {
-                format = "$level $tag $rankMsg $playerName: $chatColor$message"
+                format = "$rankMsg $level $tag $playerName: $chatColor$message"
             }
         } else {
             if (heart !== null) {
-                format = "$level $rankMsg $playerName: $chatColor$message"
+                format = " $rankMsg $level $playerName: $chatColor$message"
             }
         }
 
