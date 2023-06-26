@@ -3,7 +3,7 @@
     permission = "buffered.reload"
 )
 
-package sh.astrid.buffered.commands
+package sh.astrid.buffered.commands.admin
 
 import me.honkling.commando.annotations.Command
 import org.bukkit.entity.Player

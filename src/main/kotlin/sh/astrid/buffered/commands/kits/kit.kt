@@ -3,7 +3,7 @@
     permission = ""
 )
 
-package sh.astrid.buffered.commands
+package sh.astrid.buffered.commands.kits
 
 import me.honkling.commando.annotations.Command
 import org.bukkit.Material

@@ -4,7 +4,7 @@
         description = "Used by tebex to broadcast purchases"
 )
 
-package sh.astrid.buffered.commands
+package sh.astrid.buffered.commands.admin
 
 import me.honkling.commando.annotations.Command
 import org.bukkit.Bukkit

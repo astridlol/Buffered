@@ -4,7 +4,7 @@
         description = "Add a tag to a player"
 )
 
-package sh.astrid.buffered.commands
+package sh.astrid.buffered.commands.tags
 
 import me.honkling.commando.annotations.Command
 import org.bukkit.command.ConsoleCommandSender

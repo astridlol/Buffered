@@ -4,7 +4,7 @@
         description = "Shows the kit GUI"
 )
 
-package sh.astrid.buffered.commands
+package sh.astrid.buffered.commands.kits
 
 import me.honkling.commando.annotations.Command
 import me.honkling.pocket.GUI
