@@ -7,6 +7,7 @@ import sh.astrid.buffered.Buffered
 import sh.astrid.buffered.data.PlayerData
 import sh.astrid.buffered.data.player.Players
 import org.bukkit.event.player.PlayerQuitEvent
+import sh.astrid.buffered.data.player.BufferedPlayer
 import sh.astrid.buffered.lib.extensions.mm
 import sh.astrid.buffered.scoreboard.createScoreboard
 import sh.astrid.buffered.scoreboard.getFastboard
@@ -22,27 +23,36 @@ class JoinListener : Listener {
         val players = Players()
 
         val p = event.player
-        val playerData = players.getPlayer(p.uniqueId)
+        var playerData = players.getPlayer(p.uniqueId)
 
-        // If data doesn't exist for them, create it
-        players.createPlayer(PlayerData(p.uniqueId))
+        val hasJoinedBefore = playerData !== null
+
+        if(!hasJoinedBefore) {
+            players.createPlayer(PlayerData(p.uniqueId))
+            playerData = players.getPlayer(p.uniqueId)
+        }
+
+        if(!hasJoinedBefore) {
+            val playerCount = players.getCount()
+            event.joinMessage("<s>→ <p>Welcome, ${p.name} <l><i>(#$playerCount)".mm())
+        } else {
+            event.joinMessage("<s>→<p> ${p.name}".mm())
+        }
 
         // Create a scoreboard for the player
         p.createScoreboard()
-
-        if(playerData != null) {
-            event.joinMessage("<s>→<p> ${p.name}".mm())
-            return
-        }
 
         // Update all other scoreboards
         Buffered.boards.forEach {
             it.value.updateScoreboard()
         }
 
-        val playerCount = players.getCount()
-
-        event.joinMessage("<s>→ <p>Welcome, ${p.name} <l><i>(#$playerCount)".mm())
+        if(playerData !== null && !playerData.ownedTags.contains("release")) {
+            val player = BufferedPlayer(p.uniqueId)
+            player.addTag("release")
+            player.addBalance(10)
+            p.sendMessage("<p>Thanks so much for joining! You've received a <s><bold>tag</s> and <s><bold>10 coins</s> <3".mm())
+        }
     }
 
     @EventHandler
