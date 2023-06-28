@@ -7,7 +7,6 @@ import org.bukkit.Location
 import org.bukkit.entity.Player
 import sh.astrid.buffered.Buffered
 
-
 val spawnWorld = Bukkit.getWorld("world")
 
 fun Player.tpToSpawn() {
@@ -33,3 +32,4 @@ fun Player.isInCombat(): Boolean {
 fun Player.getRemainingCombat(): Long {
     return Buffered.combatLog.getRemainingTime(this)
 }
+
