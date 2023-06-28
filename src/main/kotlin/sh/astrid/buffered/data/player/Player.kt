@@ -96,6 +96,11 @@ class BufferedPlayer(uuid: UUID) {
         col.updateOne(query, setValue(PlayerEntry::buildMode, enabled))
     }
 
+    fun setRekit(enabled: Boolean) {
+        col.updateOne(query, setValue(PlayerEntry::rekitEnabled, enabled))
+    }
+
+
     fun getPlayer(): PlayerEntry {
         return player
     }

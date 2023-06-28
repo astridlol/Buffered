@@ -16,6 +16,7 @@ import org.bukkit.inventory.ItemStack
 import sh.astrid.buffered.Buffered
 import sh.astrid.buffered.data.player.BufferedPlayer
 import sh.astrid.buffered.lib.extensions.*
+import sh.astrid.buffered.lib.giveKit
 import sh.astrid.buffered.scoreboard.updateScoreboard
 import kotlin.random.Random
 
@@ -115,8 +116,17 @@ class EntityDamageListener : Listener {
 
         // Reset the players current kit
         // In the future, check if they have re-kit enabled. The permission node buffered.rekit would be set for the toggle command.
-        victimData.setKit(null)
-        victim.inventory.clear()
+
+        val victimPlayer = victimData.getPlayer()
+
+        if(!victimPlayer.rekitEnabled) {
+            victimData.setKit(null)
+            victim.inventory.clear()
+        } else {
+            // This method resets the inventory still, but re-assigns the kit brand new (so things like food could replenish)
+            // could *possibly* be null
+            victim.giveKit(victimPlayer.currentKit ?: "starter")
+        }
 
         // Add EXP to killer
         killerData.addExp(Random.nextInt(1, 11))

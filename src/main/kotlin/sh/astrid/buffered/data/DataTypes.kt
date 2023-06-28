@@ -9,6 +9,7 @@ data class PlayerEntry(
         val uuid: String,
         val firstJoin: Long,
         val buildMode: Boolean = false,
+        val rekitEnabled: Boolean = false,
         val balance: Int = 0,
         val level: Int = 1,
         val exp: Int = 0,
