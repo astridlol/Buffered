@@ -51,7 +51,7 @@ fun tags(executor: Player) {
       xxxxbxxxx
       xxxxxxxxx
       xxxxxxxxx
-      xxyyyyyxx
+      xyyyyyyyx
       xxxxxxxxx
       xxxxxxxxx
     """.trimIndent()
@@ -72,7 +72,7 @@ fun tags(executor: Player) {
 
     gui.put('b', about)
 
-    var index = 29
+    var index = 28
 
     Buffered.tagData.tags.forEach {
         val item = ItemStack(Material.NAME_TAG)
