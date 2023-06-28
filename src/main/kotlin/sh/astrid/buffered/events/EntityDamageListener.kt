@@ -7,6 +7,7 @@ import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver
 import org.bukkit.Bukkit
 import org.bukkit.Material
+import org.bukkit.entity.Arrow
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -17,6 +18,7 @@ import sh.astrid.buffered.data.player.BufferedPlayer
 import sh.astrid.buffered.lib.extensions.*
 import sh.astrid.buffered.scoreboard.updateScoreboard
 import kotlin.random.Random
+
 
 fun Player.parseKillMessage(killer: Player): Component {
     val mm = MiniMessage.miniMessage()
@@ -67,9 +69,25 @@ class EntityDamageListener : Listener {
     @EventHandler
     fun onDamage(event: EntityDamageByEntityEvent) {
         val victim = event.entity
-        val killer = event.damager
+        var killer: Player? = null
 
         if(victim !is Player) return
+
+        Buffered.combatLog.setTag(victim)
+
+        if(event.damager is Arrow) {
+            val arrow = event.damager as Arrow
+            if(arrow.shooter is Player) {
+                killer = arrow.shooter as Player
+                // Prevents people from bowing from spawn
+                if(killer.isInRegion("spawn")) {
+                    event.isCancelled = true
+                }
+            }
+            else return
+        }
+
+        if(killer !== null) Buffered.combatLog.setTag(killer)
 
         // If they're not dead yet, return
         if(victim.health - event.finalDamage > 0) return
@@ -78,9 +96,7 @@ class EntityDamageListener : Listener {
         victim.health = 20.0
         victim.tpToSpawn()
 
-        // If they weren't killed by a player, return
-        // NOTE: This does not account for players who've been killed by a bow. need to add support for this!
-        if(killer !is Player) return
+        if(killer === null) return
 
         val killerData = BufferedPlayer(killer.uniqueId)
         val victimData = BufferedPlayer(victim.uniqueId)

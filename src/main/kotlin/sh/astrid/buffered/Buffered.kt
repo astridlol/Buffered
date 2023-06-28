@@ -8,6 +8,7 @@ import sh.astrid.buffered.data.*
 import sh.astrid.buffered.events.*
 import sh.astrid.buffered.events.abiliites.KnightAbility
 import sh.astrid.buffered.events.abiliites.WitchAbility
+import sh.astrid.buffered.lib.CombatManager
 import sh.astrid.buffered.lib.CooldownManager
 import sh.astrid.buffered.lib.forever
 import sh.astrid.buffered.scoreboard.fastboard.FastBoard
@@ -24,6 +25,7 @@ class Buffered : JavaPlugin() {
         lateinit var shopData: Shop
         var boards: MutableMap<UUID, FastBoard> = HashMap()
         var cooldowns = CooldownManager()
+        var combatLog = CombatManager()
     }
 
     fun reloadConfigs() {

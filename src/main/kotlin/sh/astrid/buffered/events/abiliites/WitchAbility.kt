@@ -14,7 +14,6 @@ import sh.astrid.buffered.lib.extensions.mm
 import sh.astrid.buffered.lib.extensions.prettyNamespace
 import sh.astrid.buffered.lib.randomChance
 
-
 class WitchAbility: Listener {
     init {
         Buffered.instance.server.pluginManager.registerEvents(this, Buffered.instance)

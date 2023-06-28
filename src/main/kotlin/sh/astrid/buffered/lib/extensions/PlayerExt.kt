@@ -5,6 +5,7 @@ import com.sk89q.worldguard.WorldGuard
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.entity.Player
+import sh.astrid.buffered.Buffered
 
 
 val spawnWorld = Bukkit.getWorld("world")
@@ -23,4 +24,12 @@ fun Player.isInRegion(region: String): Boolean {
     val set = query.getApplicableRegions(loc)
 
     return set.regions.contains(serverRegions.regions[region])
+}
+
+fun Player.isInCombat(): Boolean {
+    return Buffered.combatLog.hasTag(this)
+}
+
+fun Player.getRemainingCombat(): Long {
+    return Buffered.combatLog.getRemainingTime(this)
 }

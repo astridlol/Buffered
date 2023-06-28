@@ -19,3 +19,12 @@ data class PlayerEntry(
         val ownedTags: List<String> = listOf(""),
         val currentTag: String? = null,
 )
+
+
+data class ReportData(val suspectUUID: UUID, val creatorUUID: UUID, val reason: String)
+data class ReportEntry(
+        val suspectUUID: String,
+        val creatorUUID: String,
+        val reason: String = "",
+        val createdAt: Long
+)

@@ -34,6 +34,9 @@ object LinkyAPI {
         return YamlConfiguration.loadConfiguration(configFile)
     }
 
+    // Note: I used native methods for this because I only needed to do one web request.
+    // Might switch over to OkHttp if time ever needs it.
+
     fun getUser(uuid: UUID): UserInfoResponse? {
         val apiUrl = "https://linky.astrid.sh/api/users/$uuid"
 
